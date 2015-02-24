@@ -1,0 +1,29 @@
+// humberto salvador sistemas de ec.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#include "math.h"
+using namespace std;
+
+
+void main()
+{
+	float a,b,c,d,e,f,g,x,y;
+	cout<<"ingrese a:";
+	cin>> a;
+	cout<<"ingrese b:";
+	cin>> b;
+	cout<<"ingrese c:";
+	cin>> c;
+	cout<<"ingrese d:";
+	cin>> d;
+	cout<<"ingrese e:";
+	cin>> e;
+	cout<<"ingrese f:";
+	cin>> f;
+	cout<<"x="<<x<<endl;
+	cout<<"y="<<y;
+	getch();
+}
