@@ -1,0 +1,44 @@
+// palindromo (Humberto Salvador).cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+string invertir (string Pal);
+
+void main()
+{
+string A,B;
+bool band;
+cout<<"ingresar la palabra a verifica: ";
+getline(cin,A);
+B=invertir(A);
+band=A.compare(B);
+   if(band)
+   {
+	   cout<<"Es Palindromo \n";
+   }
+   else
+   {
+	   cout<<"No es Palindromo \n";
+   }
+getch();
+}
+string invertir(string Pal)
+{
+	int TAM;
+	char aux;
+	int i;
+	string T;
+	TAM=Pal.length();
+	for(i=0;i<TAM/2;i++)
+	  {
+		  aux=Pal.at(i);
+		  Pal.at(i)=Pal.at(TAM-i-1);
+		  Pal.at(TAM-i-1)=aux;
+	  }
+	return(T);
+}
