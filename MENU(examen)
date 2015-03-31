@@ -1,0 +1,103 @@
+// examen(HUMBERTO SALVADOR).cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#define FIL 30
+#define COL 30
+using namespace std;
+
+void cargarMatriz(int mat[FIL][COL],int n,int m);
+int sumarDiagonal(int mat[FIL][COL],int n,int m);
+void mostrarMatriz(int mat[FIL][COL],int n,int m);
+float calcularPromedio(int mat[FIL][COL],int n,int m);
+
+
+void main()
+{int mat[FIL][COL],nroFil,nroCol,opcion,suma;
+float prom;
+  cout<<"Ingrese una matriz CUADRADA \n";
+  cout<<"numero de filas? ";
+  cin>>nroFil;
+  cout<<"numero de Columnas? ";
+  cin>>nroCol;
+  do{  
+ 
+  cout<<" \n========================== MENU=============================\n";
+  cout<<"1.- cargar Matriz \n";
+  cout<<"2.- sumar Diagonal \n";
+  cout<<"3.- mostrar la matriz \n";
+  cout<<"4.- calcular Promedio \n";
+  cout<<"0.- salir\n";
+  cout<<"ingrese la opcion\n";
+  cin>>opcion;
+  switch(opcion)
+  {
+  case 1 : cargarMatriz(mat,nroFil,nroCol);
+	         break;
+  case 2 : suma=sumarDiagonal(mat,nroFil,nroCol);
+	       cout<<"la suma de la diagonal es: "<<suma;
+	         break;
+  case 3 : mostrarMatriz(mat,nroFil,nroCol);
+	         break;
+  case 4 : prom=calcularPromedio(mat,nroFil,nroCol);
+	  cout<<"el promedio es: "<<prom;
+	         break;
+  default  :
+	         cout<<"Error, Opcion invalida";
+  }
+  }while(opcion!=0);
+  getch();
+}
+
+void cargarMatriz(int mat[FIL][COL],int n,int m)
+{
+	int i,j;
+	for(i=0;i<n;i++)
+		{for(j=0;j<m;j++)
+	         {
+				 cout<<"introducir dato\n";
+				 cin>>mat[i][j];
+	         }
+	   }
+}
+int sumarDiagonal(int mat[FIL][COL],int n,int m)
+{
+	int i,j,s=0;
+	for(i=0;i<n;i++)
+		{for(j=0;j<m;j++)
+	         {
+				if(i==j)
+				{
+					s=s+mat[i][j];
+				}
+	         }
+	   }
+	return(s);
+}
+void mostrarMatriz(int mat[FIL][COL],int n,int m)
+{
+	int i,j;
+	for(i=0;i<n;i++)
+		{for(j=0;j<m;j++)
+	         {
+				 cout<<mat[i][j]<<" ";
+	         }
+	cout<<endl;
+	   }
+}
+float calcularPromedio(int mat[FIL][COL],int n,int m)
+{
+	int i,j,s=0;
+	float div;
+	div=n*m;
+	for(i=0;i<n;i++)
+		{for(j=0;j<m;j++)
+	         {
+					s=s+mat[i][j];
+				
+	         }
+	   }
+	return(s/div);
+}
