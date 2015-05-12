@@ -1,0 +1,152 @@
+INTEGRANTES:
+HUMBERTO SALVADOR MARQUEZ
+CARLA ARCIENAGA
+ALEXANDRA RIBERA
+
+#include "stdafx.h"
+#include "stdio.h"
+#include "conio.h"
+#include "stdlib.h"
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+void ALTA_SECUENCIAL();
+void CONSULTA_SECUENCIAL();
+void LISTADO_SECUENCIAL();
+
+struct tipo_registro {
+
+int no_prod;
+char descrip[30];
+int cantidad;
+float precio;
+char garantia;
+};
+
+tipo_registro Registro;
+
+FILE *alias;
+                   
+void main(){
+
+system("cls");
+ALTA_SECUENCIAL();
+CONSULTA_SECUENCIAL();
+LISTADO_SECUENCIAL();
+}
+
+void ALTA_SECUENCIAL()
+{ 
+int no_prod;
+system("cls");
+cout<<"\n\rALTAS DE REGISTROS DE PRODUCTOS";
+alias=fopen("PRODUCTO.SEC","rb+");
+
+if (alias==NULL)
+alias=fopen("PRODUCTO.SEC","wb");
+cout<<"\n\n\n\rNumero de producto:  ";
+cin>>no_prod;
+
+fread(&Registro,sizeof(Registro),1,alias);
+while(!feof(alias))
+{
+	if (Registro.no_prod==no_prod)
+	{ cout<<"\n\n\n\rRegistro dupicado!!!!";
+	  fclose(alias);
+	  getch();
+	  return;
+
+}
+fread(&Registro,sizeof (Registro),1,alias);
+}
+getchar();
+cout<<"\n\rDescripcion: ";gets(Registro.descrip);
+cout<<"\n\rCantidad: ";
+cin>>Registro.cantidad;
+cout<<"\n\rPrecio:";
+cin>>Registro.precio;
+do
+{
+	cout<<"\n\rGarantia: ";
+	Registro.garantia=toupper(getche());
+}
+while(Registro.garantia!='S'&& Registro.garantia!='N');
+Registro.no_prod=no_prod;
+fwrite(&Registro,sizeof(Registro),1,alias);
+fclose(alias);
+cout<<"\n\n\n\rProducto registrado!!!";
+cout<<"\n\r<<< Oprima cualquier tecla para continuar>>>";
+getch();
+return;
+}
+
+void CONSULTA_SECUENCIAL(void)
+{
+int no_prod;
+system("cls");
+cout << "\n\rCONSULTA DE REGISTROS DE PRODUCTOS";
+alias=fopen("PRODUCTO.SEC","rb"); // Intenta abrir el archivoPRODUCTO.SEC
+// en modo de solo lectura
+if(alias==NULL)
+{
+cout << "\n\n\n\rNo existe el archivo !!!";
+cout << "\n\r<<< Oprima cualquier tecla para continuar >>>";
+getch();
+return;
+}
+cout << "\n\n\n\rNumero de producto: "; cin >> no_prod;
+fread(&Registro,sizeof(Registro),1,alias);
+// Lee el "Registro", de tamano=sizeof(Registro) del archivo "alias"
+while(!feof(alias))
+{
+if(Registro.no_prod==no_prod)
+{
+cout << "\n\rNo Prod      Descripcion       Cantidad       Precio          Garantia";
+cout << "\n\r------------------------------------------------------------------------\n";
+cout<<Registro.no_prod<<"            "<<Registro.descrip<<"         "<<Registro.cantidad<<"            "<<Registro.precio<<"          "<<Registro.garantia<<"\n";
+fclose(alias);
+cout << "\n\r<<< Oprima cualquier tecla para continuar >>>";
+getch();
+return;
+}
+fread(&Registro,sizeof(Registro),1,alias);
+}
+cout << "\n\rNo se encuentra ese registro !!!";
+fclose(alias); // Cierra el archivo
+cout << "\n\r<<< Oprima cualquier tecla para continuar >>>";
+getch();
+return;
+}
+
+void LISTADO_SECUENCIAL(void)
+{
+system("cls");
+cout << "\n\rLISTADO DE REGISTROS DE PRODUCTOS";
+alias=fopen("PRODUCTO.SEC","rb"); // Intenta abrir el archivo PRODUCTO.SEC
+// en modo de solo lectura
+if(alias==NULL)
+{
+cout << "\n\n\n\rNo existe el archivo !!!";
+cout << "\n\r<<< Oprima cualquier tecla para continuar >>>";
+getch();
+return;
+}
+cout << "\n\rNoProd        Descripcion       Cantidad       Precio      Garantia";
+cout << "\n\r------------------------------------------------------------------------\n";
+fread(&Registro,sizeof(Registro),1,alias);
+// Lee el "Registro", de tamano=sizeof(Registro) del archivo "alias"
+while(!feof(alias)) // Ciclo mientras no se encuentre el final delarchivo
+{
+cout<<Registro.no_prod<<"\t"<<Registro.descrip<<"\t\t"<<Registro.cantidad<<"\t\t\t"<<Registro.precio<<"  "<<Registro.garantia<<"\n";
+fread(&Registro,sizeof(Registro),1,alias);
+}
+fclose(alias); // Cierra el archivo
+cout << "\n\r------------------------------------------------------------------------";
+cout << "\n\rFin del listado !!!";
+cout << "\n\r<<< Oprima cualquier tecla para continuar >>>";
+getch();
+return;
+}
+
